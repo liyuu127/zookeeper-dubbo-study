@@ -15,7 +15,7 @@ public class ZKConnectSessionWatcher implements Watcher {
 	
 	final static Logger log = LoggerFactory.getLogger(ZKConnectSessionWatcher.class);
 
-	public static final String zkServerPath = "192.168.1.110:2181";
+	public static final String zkServerPath = "192.168.35.188:2181";
 	public static final Integer timeout = 5000;
 	
 	public static void main(String[] args) throws Exception {

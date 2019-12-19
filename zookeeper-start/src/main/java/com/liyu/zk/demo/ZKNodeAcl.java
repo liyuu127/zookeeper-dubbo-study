@@ -16,8 +16,6 @@ import org.apache.zookeeper.data.ACL;
 import org.apache.zookeeper.data.Id;
 import org.apache.zookeeper.data.Stat;
 
-import com.imooc.utils.AclUtils;
-
 /**
  * 
  * @Description: zookeeper 操作节点acl演示
