@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
+import com.liyu.utils.AclUtils;
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.WatchedEvent;
@@ -24,7 +25,7 @@ public class ZKNodeAcl implements Watcher {
 
 	private ZooKeeper zookeeper = null;
 	
-	public static final String zkServerPath = "192.168.1.110:2181";
+	public static final String zkServerPath = "192.168.35.188:2181";
 	public static final Integer timeout = 5000;
 	
 	public ZKNodeAcl() {}
@@ -99,17 +100,17 @@ public class ZKNodeAcl implements Watcher {
 //		zkServer.getZookeeper().setData("/aclimooc/testdigest", "now".getBytes(), 1);
 		
 		// ip方式的acl
-//		List<ACL> aclsIP = new ArrayList<ACL>();
-//		Id ipId1 = new Id("ip", "192.168.1.6");
-//		aclsIP.add(new ACL(Perms.ALL, ipId1));
-//		zkServer.createZKNode("/aclimooc/iptest6", "iptest".getBytes(), aclsIP);
+		List<ACL> aclsIP = new ArrayList<ACL>();
+		Id ipId1 = new Id("ip", "192.168.35.188");
+		aclsIP.add(new ACL(Perms.ALL, ipId1));
+		zkServer.createZKNode("/aclimooc/iptest6", "iptest".getBytes(), aclsIP);
 
 		// 验证ip是否有权限
-		zkServer.getZookeeper().setData("/aclimooc/iptest6", "now".getBytes(), 1);
-		Stat stat = new Stat();
-		byte[] data = zkServer.getZookeeper().getData("/aclimooc/iptest6", false, stat);
-		System.out.println(new String(data));
-		System.out.println(stat.getVersion());
+//		zkServer.getZookeeper().setData("/aclimooc/iptest6", "now".getBytes(), 1);
+//		Stat stat = new Stat();
+//		byte[] data = zkServer.getZookeeper().getData("/aclimooc/iptest6", false, stat);
+//		System.out.println(new String(data));
+//		System.out.println(stat.getVersion());
 	}
 
 	public ZooKeeper getZookeeper() {
