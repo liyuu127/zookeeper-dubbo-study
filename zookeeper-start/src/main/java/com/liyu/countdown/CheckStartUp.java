@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class CheckStartUp {
@@ -26,15 +27,18 @@ public class CheckStartUp {
 		stationList.add(new StationShandongChangchuan(countDown));
 		
 		// 使用线程池
-		Executor executor = Executors.newFixedThreadPool(stationList.size());
-		
+//		Executor executor = Executors.newFixedThreadPool(stationList.size());
+		ExecutorService threadPool = Executors.newFixedThreadPool(stationList.size());
+
 		for (DangerCenter center : stationList) {
-			executor.execute(center);
+//			executor.execute(center);
+			threadPool.execute(center);
 		}
 		
 		// 等待线程执行完毕
 		countDown.await();
-		
+		threadPool.shutdown();
+
 		for (DangerCenter center : stationList) {
 			if (!center.isOk()) {
 				return false;
