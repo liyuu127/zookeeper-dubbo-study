@@ -5,12 +5,13 @@ import java.util.List;
 import org.apache.curator.RetryPolicy;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
-import org.apache.curator.framework.recipes.cache.ChildData;
-import org.apache.curator.framework.recipes.cache.PathChildrenCache;
+import org.apache.curator.framework.recipes.cache.*;
 import org.apache.curator.framework.recipes.cache.PathChildrenCache.StartMode;
-import org.apache.curator.framework.recipes.cache.PathChildrenCacheEvent;
-import org.apache.curator.framework.recipes.cache.PathChildrenCacheListener;
+import org.apache.curator.retry.ExponentialBackoffRetry;
 import org.apache.curator.retry.RetryNTimes;
+import org.apache.zookeeper.CreateMode;
+import org.apache.zookeeper.ZooDefs;
+import org.apache.zookeeper.data.Stat;
 
 public class CuratorOperator {
 
@@ -82,11 +83,11 @@ public class CuratorOperator {
 		
 		// 创建节点
 		String nodePath = "/super/imooc";
-//		byte[] data = "superme".getBytes();
-//		cto.client.create().creatingParentsIfNeeded()
-//			.withMode(CreateMode.PERSISTENT)
-//			.withACL(Ids.OPEN_ACL_UNSAFE)
-//			.forPath(nodePath, data);
+		byte[] data = "superme".getBytes();
+		cto.client.create().creatingParentsIfNeeded()
+			.withMode(CreateMode.PERSISTENT)
+			.withACL(ZooDefs.Ids.OPEN_ACL_UNSAFE)
+			.forPath(nodePath, data);
 		
 		// 更新节点数据
 //		byte[] newData = "batman".getBytes();
@@ -103,8 +104,8 @@ public class CuratorOperator {
 		
 		// 读取节点数据
 //		Stat stat = new Stat();
-//		byte[] data = cto.client.getData().storingStatIn(stat).forPath(nodePath);
-//		System.out.println("节点" + nodePath + "的数据为: " + new String(data));
+//		byte[] data2 = cto.client.getData().storingStatIn(stat).forPath(nodePath);
+//		System.out.println("节点" + nodePath + "的数据为: " + new String(data2));
 //		System.out.println("该节点的版本号为: " + stat.getVersion());
 		
 		
