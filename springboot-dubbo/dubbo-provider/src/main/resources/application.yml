@@ -1,0 +1,9 @@
+server:
+  port: 8333
+
+#dubbo配置
+spring:
+  dubbo:
+    application:
+      name: dubbo-provider
+      registry: zookeeper://192.168.35.188:2181 #//你的zookeeper所在服务器的ip地址:2181:
